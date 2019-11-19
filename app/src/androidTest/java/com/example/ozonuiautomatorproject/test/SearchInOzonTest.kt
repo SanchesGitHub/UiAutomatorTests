@@ -1,19 +1,22 @@
 package com.example.ozonuiautomatorproject.test
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.ozonuiautomatorproject.application.OzonApp
+import com.example.ozonuiautomatorproject.application.OzonMainPage
+import com.example.ozonuiautomatorproject.application.OzonSearchPage
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class SearchInOzonTest : AbstractApplicationTest<OzonApp>(OzonApp()) {
+class SearchInOzonTest : AbstractApplicationTest<OzonMainPage>(OzonMainPage()) {
+
+    private val ozonSearchPage = OzonSearchPage()
 
     @Test
-    fun checkingProductSearchHints() = with(app) {
+    fun checkingProductSearchHintsTest() = with(app) {
         open()
         clickSearch()
-        typeToSearch("философия java")
-        assert(getProductTitle() == "Философия Java")
-        assert(getProductPrice() == "1 499 \u20BD")
+        ozonSearchPage.typeToSearch("философия java")
+        assert(ozonSearchPage.getTitleProduct() == "Философия Java")
+        assert(ozonSearchPage.getPriceProduct() == "1 499 \u20BD")
     }
 }
